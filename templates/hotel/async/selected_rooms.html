@@ -7,13 +7,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>All Room Selections</h2>
+          <h2>Tất cả các lựa chọn phòng</h2>
           <nav id="breadcrumbs">
             <ul>
-              <li><a>Home</a></li>
-              <li><a>Hotel</a></li>
-              <li><a>Rooms</a></li>
-              <li>My selected rooms</li>
+              <li><a>Trang chủ</a></li>
+              <li><a>Khách sạn</a></li>
+              <li><a>Phòng</a></li>
+              <li>Phòng tôi đã đặt</li>
             </ul>
           </nav>
         </div>
@@ -27,15 +27,15 @@
       <div class="col-lg-8 col-md-8 utf_listing_payment_section">
 	    
         <div class="utf_booking_listing_section_form margin-bottom-40">
-            <h3><i class="fas fa-bed"></i> Selected Rooms</h3>
+            <h3><i class="fas fa-bed"></i> Phòng đã đặt</h3>
             <div class="utf_listing_section">
                     <div class="utf_pricing_list_section">
                         <ul>
                             {% for id, item in data.items %}
                                 <li>
-                                    <h5>Room: {{item.room_name}}  <small><a style="cursor: pointer;" class="delete-item" data-item="{{ id }}"><i class="fas fa-trash" style="color: red;"></i></a></small> </h5>
-                                    <p><strong>Beds :</strong> {{item.number_of_beds}}  </p>
-                                    <span>${{item.room_price}} </span>
+                                    <h5>Phòng: {{item.room_name}}  <small><a style="cursor: pointer;" class="delete-item" data-item="{{ id }}"><i class="fas fa-trash" style="color: red;"></i></a></small> </h5>
+                                    <p><strong>Giường: </strong> {{item.number_of_beds}}  </p>
+                                    <span>{{item.room_price}} ₫ </span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -44,57 +44,57 @@
         </div>
 
         <div class="utf_booking_listing_section_form margin-bottom-40">
-          <h3><i class="fas fa-check-circle"></i> Update Selection</h3>
+          <h3><i class="fas fa-check-circle"></i> Cập nhật lựa chọn</h3>
           <div class="utf_listing_section">
                   <div class="utf_pricing_list_section">
                     <form class="row with-forms margin-top-0" method="POST" action="{% url 'booking:check_room_availability' %}">
                       {% csrf_token %}
                       <input type="hidden" value="{{hotel.id}}" name="hotel-id" id="">
                       <div class="col-lg-12 col-md-12 select_date_box">
-                          <label for="">Check-in Date</label>
+                          <label for="">Ngày nhận phòng</label>
                           <input type="date" id="date-picker" value="{{checkin}}" name="checkin" placeholder="Select Date">
                       </div>
                       <div class="col-lg-12 col-md-12 select_date_box">
-                          <label for="">Check-out Date</label>
+                          <label for="">Ngày trả phòng</label>
                           <input type="date" name="checkout" value="{{checkout}}" id="date-picker" placeholder="Select Date">
                       </div>
                       <div class="with-forms">
                           <div class="col-lg-12 col-md-12">
-                              <a href="#">Guests <span class="qtyTotal" style="visibility: hidden;" name="qtyTotal"></span></a>
+                              <a href="#">KHách <span class="qtyTotal" style="visibility: hidden;" name="qtyTotal"></span></a>
                               <div class="panel-dropdown-content">
                                   <div class="qtyButtons">
-                                      <div class="qtyTitle">Adults</div>
+                                      <div class="qtyTitle">Người lớn</div>
                                       <input type="text" name="adult" {% if adult == None %}value="1"{% else %}value="{{adult}}"{% endif %}>
                                   </div>
                                   <div class="qtyButtons">
-                                      <div class="qtyTitle">Childrens</div>
+                                      <div class="qtyTitle">Trẻ em</div>
                                       <input type="text" name="children" {% if children == None %}value="1"{% else %}value="{{children}}"{% endif %}>
                                   </div>
                               </div>
                           </div>
                       </div>
 
-                      <a style="margin-top: 50px;">Select Room Type (*required) </a>
+                      <a style="margin-top: 50px;">Chọn loại phòng (*Yêu cầu) </a>
                       <select name="room-type">
-                          <option value="">Select Room</option>
+                          <option value="">Chọn phòng</option>
                           
                           {% for r in hotel.hotel_room_types %}
                               <option value="{{r.slug}}">{{r.type}}</option>
                           {% endfor %}
                       </select>
                     
-                      <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5"> <i class="fas fa-check-circle"></i> Update Selection </button>
+                      <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5"> <i class="fas fa-check-circle"></i> Cập nhật lựa chọn </button>
                   </form>
                   </div>
           </div>
       </div>
             
         <div class="utf_booking_listing_section_form margin-bottom-40">
-		  <h3><i class="fas fa-user"></i> Billing Information</h3>
+		  <h3><i class="fas fa-user"></i> Thông tin thanh toán</h3>
 			<div class="row">
 			  <div class="col-md-12">
-				<label>First Name</label>
-				<input name="full_name" type="text" value="" placeholder="First Name">
+				<label>Tên</label>
+				<input name="full_name" type="text" value="" placeholder="Tên">
 			  </div>
 			  <div class="col-md-6">
 				<div class="medium-icons">
@@ -104,12 +104,12 @@
 			  </div>
 			  <div class="col-md-6">
 				<div class="medium-icons">
-				  <label>Phone</label>
-				  <input name="phone" type="text" value="" placeholder="Phone">
+				  <label>Số điện thoại</label>
+				  <input name="phone" type="text" value="" placeholder="Số điện thoại">
 				</div>
 			  </div>
         <div class="col-lg-12">
-          <button type="submit" class="button utf_booking_confirmation_button margin-top-20 margin-bottom-10">Continue to checkout <i class="fas fa-right-arrow"></i></button> 		
+          <button type="submit" class="button utf_booking_confirmation_button margin-top-20 margin-bottom-10">Tiếp tục thanh toán <i class="fas fa-right-arrow"></i></button> 		
         </div>
 			</div>
 		</div>
@@ -130,15 +130,15 @@
           </div>
         </div>
         <div class="boxed-widget opening-hours summary margin-top-0">
-          <h3><i class="fa fa-calendar-check-o"></i> Booking Summary</h3>
+          <h3><i class="fa fa-calendar-check-o"></i> Tóm tắt đặt phòng</h3>
           <ul>
-            <li>Check-in <span>{{checkin}}</span></li>
-            <li>Check-out <span>{{checkout}}</span></li>            
-            <li>Total Days <span>{{total_days}} Days</span></li>            
-            <li>Adults <span>{{ adult }} Adult</span></li>
-            <li>Children <span>{{ children }} Children</span></li>
+            <li>Nhận phòng <span>{{checkin}}</span></li>
+            <li>Trả phòng <span>{{checkout}}</span></li>            
+            <li>Tổng số ngày <span>{{total_days}} ngày</span></li>            
+            <li>Người lớn <span>{{ adult }} người lớn</span></li>
+            <li>Trẻ em <span>{{ children }} trẻ em</span></li>
 			      <li>V.A.T <span>$0.00</span></li>
-            <li class="total-costs">Total Cost <span>${{total}}</span></li>
+            <li class="total-costs">Tổng chi phí <span>{{total}}đ</span></li>
           </ul>
         </div>
       </div>

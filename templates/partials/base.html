@@ -7,12 +7,12 @@
     <meta name="description" content="">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desphixs - Hotel Management System</title>
+    <title>HTC | Trang chính thức | Khách sạn</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon.png">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}?v={{ timestamp }}">
     <link rel="stylesheet" href="{% static 'css/mmenu.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" id="colors">
     <link href="{% static 'css/datedropper.css' %}" rel="stylesheet" type="text/css">
@@ -58,36 +58,36 @@
             <div id="header">
                 <div class="container">
                     <div class="utf_left_side">
-                        <div id="logo"> <a href="/"><img src="{% static 'images/logo.png' %}" alt=""></a> </div>
+                        <div id="logo"> <a href="{% url 'hotel:index'%}"><img src="{% static 'images/logo.jpg' %}" alt=""></a> </div>
                         <div class="mmenu-trigger">
                             <button class="hamburger utfbutton_collapse" type="button">
-				<span class="utf_inner_button_box">
-					<span class="utf_inner_section"></span>
-				</span>
-			</button>
+				                <span class="utf_inner_button_box">
+					                <span class="utf_inner_section"></span>
+				                </span>
+			                </button>
                         </div>
                         <nav id="navigation" class="style_one">
                             <ul id="responsive">
-                                <li><a class="current" href="{% url 'hotel:index' %}">Home</a></li>
-                                <li><a href="#">Hotels</a>
+                                <li><a class="current" href="{% url 'hotel:index' %}">Trang chủ</a></li>
+                                <li><a href="#">Khách sạn</a>
                                     <ul>
-                                        <li><a href="#">Luxury</a></li>
-                                        <li><a href="#">Business</a></li>
-                                        <li><a href="#">Classic</a></li>
-                                        <li><a href="#">Economy</a></li>
+                                        <li><a href="#">Suite</a></li>
+                                        <li><a href="#">Deluxe</a></li>
+                                        <li><a href="#">Superior</a></li>
+                                        <li><a href="#">Standard</a></li>
                                         
                                     </ul>
                                 </li>
-                                <li><a href="#">Account</a>
+                                <li><a href="#">Tài khoản</a>
                                     <ul>
-                                        <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'dashboard:dashboard' %}">Bảng điều khiển</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Blog</a></li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="#">Thông tin</a>
                                     <ul>
-                                        <li><a href="">About Us</a></li>
-                                        <li><a href="">Contact</a></li>
+                                        <li><a href="">Về chúng tôi</a></li>
+                                        <li><a href="">Liên hệ</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -99,49 +99,49 @@
                             
                             {% if request.user.is_authenticated %}
                                 <a href="{% url 'hotel:selected_rooms' %}" class="button border sign-in "><i class="fas fa-bed"></i><span class="room-count">{{ total_selected_items }}</span></a> 
-                                <a href="{% url 'dashboard:dashboard' %}" class="button border sign-in "><i class="bi bi-grid"></i> Dashboard</a> 
-                                <a href="{% url 'userauths:sign-out' %}" class="button border with-icon"><i class="bi bi-power"></i> Sign Out</a>
+                                <a href="{% url 'dashboard:dashboard' %}" class="button border sign-in "><i class="bi bi-grid"></i> Bảng điều khiển</a> 
+                                <a href="{% url 'userauths:sign-out' %}" class="button border with-icon"><i class="bi bi-power"></i> Đăng xuất</a>
                             {% else %}
                                 <a href="{% url 'hotel:selected_rooms' %}" class="button border sign-in "><i class="fas fa-bed"></i><span class="room-count">{{ total_selected_items }}</span></a> 
-                                <a href="{% url 'userauths:sign-in' %}" class="button border sign-in "><i class="fa fa-sign-in"></i> Sign In</a> 
-                                <a href="{% url 'userauths:sign-up' %}" class="button border with-icon"><i class="bi bi-person-add"></i> Sign Up</a>
+                                <a href="{% url 'userauths:sign-in' %}" class="button border sign-in "><i class="fa fa-sign-in"></i> Đăng nhập</a> 
+                                <a href="{% url 'userauths:sign-up' %}" class="button border with-icon"><i class="bi bi-person-add"></i> Đăng ký</a>
                             {% endif %}
                         </div>
                     </div>
 
                     <div id="dialog_signin_part" class="zoom-anim-dialog mfp-hide">
                         <div class="small_dialog_header">
-                            <h3>Sign In</h3>
+                            <h3>Đăng nhập</h3>
                         </div>
                         <div class="utf_signin_form style_one">
                             <ul class="utf_tabs_nav">
-                                <li class=""><a href="#tab1">Log In</a></li>
-                                <li><a href="#tab2">Register</a></li>
+                                <li class=""><a href="#tab1">Đăng nhập</a></li>
+                                <li><a href="#tab2">Đăng ký</a></li>
                             </ul>
                             <div class="tab_container alt">
                                 <div class="tab_content" id="tab1" style="display:none;">
                                     <form method="post" class="login">
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="username">
-                      <input type="text" class="input-text" name="username" id="username" value="" placeholder="Username" />
-                    </label>
+                                                <input type="text" class="input-text" name="username" id="username" value="" placeholder="Username" />
+                                            </label>
                                         </p>
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="password">
-                      <input class="input-text" type="password" name="password" id="password" placeholder="Password"/>
-                    </label>
+                                            <input class="input-text" type="password" name="password" id="password" placeholder="Password"/>
+                                        </label>
                                         </p>
                                         <div class="utf_row_form utf_form_wide_block form_forgot_part"> <span class="lost_password fl_left"> <a href="javascript:void(0);">Forgot Password?</a> </span>
                                             <div class="checkboxes fl_right">
                                                 <input id="remember-me" type="checkbox" name="check">
-                                                <label for="remember-me">Remember Me</label>
+                                                <label for="remember-me">Nhớ tôi</label>
                                             </div>
                                         </div>
                                         <div class="utf_row_form">
                                             <input type="submit" class="button border margin-top-5" name="login" value="Login" />
                                         </div>
                                         <div class="utf-login_with my-3">
-                                            <span class="txt">Or Login in With</span>
+                                            <span class="txt">Hoặc Đăng nhập bằng</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 col-6">
@@ -158,23 +158,23 @@
                                     <form method="post" class="register">
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="username2">
-                      <input type="text" class="input-text" name="username" id="username2" value="" placeholder="Username" />
-                    </label>
+                                                <input type="text" class="input-text" name="username" id="username2" value="" placeholder="Username" />
+                                            </label>
                                         </p>
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="email2">
-                      <input type="text" class="input-text" name="email" id="email2" value="" placeholder="Email" />
-                    </label>
+                                                <input type="text" class="input-text" name="email" id="email2" value="" placeholder="Email" />
+                                            </label>
                                         </p>
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="password1">
-                      <input class="input-text" type="password" name="password1" id="password1" placeholder="Password" />
-                    </label>
+                                                <input class="input-text" type="password" name="password1" id="password1" placeholder="Password" />
+                                            </label>
                                         </p>
                                         <p class="utf_row_form utf_form_wide_block">
                                             <label for="password2">
-                      <input class="input-text" type="password" name="password2" id="password2" placeholder="Confirm Password" />
-                    </label>
+                                                <input class="input-text" type="password" name="password2" id="password2" placeholder="Confirm Password" />
+                                            </label>
                                         </p>
                                         <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
                                     </form>
@@ -198,52 +198,52 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
-                        <h4>About Us</h4>
+                        <h4>Về chúng tôi</h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
-                        <h4>Useful Links</h4>
+                        <h4>Các liên kết</h4>
                         <ul class="social_footer_link">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Listing</a></li>
+                            <li><a href="{% url 'hotel:index'%}">Trang chủ</a></li>
+                            <li><a href="#">Danh sách</a></li>
                             <li><a href="#">Blog</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
-                        <h4>My Account</h4>
+                        <h4>Tài khoản của tôi</h4>
                         <ul class="social_footer_link">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">My Listing</a></li>
-                            <li><a href="#">Favorites</a></li>
+                            <li><a href="#">Bảng điều khiển</a></li>
+                            <li><a href="#">Hồ sơ</a></li>
+                            <li><a href="#">Danh sách của tôi</a></li>
+                            <li><a href="#">Mục ưa thích</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
-                        <h4>Pages</h4>
+                        <h4>Thông tin</h4>
                         <ul class="social_footer_link">
                             <li><a href="#">Blog</a></li>
-                            <li><a href="#">Our Partners</a></li>
-                            <li><a href="#">How It Work</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Đối tác của chúng tôi</a></li>
+                            <li><a href="#">Cách hoạt động</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
-                        <h4>Help</h4>
+                        <h4>Giúp đỡ</h4>
                         <ul class="social_footer_link">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">Register</a></li>
-                            <li><a href="#">Add Listing</a></li>
-                            <li><a href="#">Pricing</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Đăng nhập</a></li>
+                            <li><a href="#">Đăng ký</a></li>
+                            <li><a href="#">Thêm danh sách</a></li>
+                            <li><a href="#">Giá cả</a></li>
+                            <li><a href="#">Liên hệ với chúng tôi</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="footer_copyright_part">Copyright © 2022 All Rights Reserved.</div>
+                        <div class="footer_copyright_part">Copyright © 2025 All Rights Reserved.</div>
                     </div>
                 </div>
             </div>

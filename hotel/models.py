@@ -20,10 +20,10 @@ ICON_TPYE = (
 )
 
 ROOM_TYPES = (
-    ('King', 'King'),
-    ('Luxury', 'Luxury'),
-    ('Normal', 'Normal'),
-    ('Economic', 'Economic'),
+    ('Suite', 'Suite'),
+    ('Deluxe', 'Deluxe'),
+    ('Superior', 'Superior'),
+    ('Standard', 'Standard'),
 )
 
 
@@ -88,7 +88,7 @@ class Hotel(models.Model):
     image = models.FileField(upload_to="hotel_gallery")
     address = models.CharField(max_length=200)
     mobile = models.CharField(max_length=20)
-    email = models.CharField(max_length=20)
+    email = models.CharField(max_length=100)
     status = models.CharField(choices=HOTEL_STATUS, max_length=10, default="published", null=True, blank=True)
 
     tags = TaggableManager(blank=True)

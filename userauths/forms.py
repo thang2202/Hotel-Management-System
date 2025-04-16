@@ -6,11 +6,11 @@ from userauths.models import Profile, User
 
 
 class UserRegisterForm(UserCreationForm):
-    full_name = forms.CharField(widget=forms.TextInput(attrs={'class': '', 'id': "", 'placeholder':'Full Name'}), max_length=100, required=True)
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': '', 'id': "", 'placeholder':'Username'}), max_length=100, required=True)
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': '' , 'id': "", 'placeholder':'Email Address'}), required=True)
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'id': "", 'placeholder':'Password'}), required=True)
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'id': "", 'placeholder':'Confirm Password'}), required=True)
+    full_name = forms.CharField(widget=forms.TextInput(attrs={'class': '', 'id': "", 'placeholder':'Họ tên'}), max_length=100, required=True)
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': '', 'id': "", 'placeholder':'Tên người dùng'}), max_length=100, required=True)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': '' , 'id': "", 'placeholder':'Email'}), required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'id': "", 'placeholder':'Mật khẩu'}), required=True)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'id': "", 'placeholder':'Xác nhận mật khẩu'}), required=True)
 
     class Meta:
         model = User

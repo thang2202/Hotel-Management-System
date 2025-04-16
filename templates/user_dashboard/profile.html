@@ -4,13 +4,13 @@
 {% block content %}
 
     <div id="dashboard">
-        <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Dashboard Sidebar Menu</a>
+        <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Menu của bảng điều khiển</a>
         {% include 'partials/dashboard_sidebar.html' %}
         <div class="utf_dashboard_content">
             <div class="row"> 
                 <div class="col-lg-12 col-md-12">
                   <div class="utf_dashboard_list_box margin-top-0">
-                    <h4 class="gray"><i class="fas fa-user"></i> Profile Details</h4>
+                    <h4 class="gray"><i class="fas fa-user"></i> Chi tiết hồ sơ</h4>
                     <div class="utf_dashboard_list_box-static"> 
                       
                       <div class="my-profile">
@@ -23,14 +23,14 @@
                                 <div class="edit-profile-photo"> 
                                     <img id="profile_image_preview" src="{{request.user.profile.image.url}}" style="width: 200px; height: 200px; object-fit: cover;" alt="">
                                     <div class="photoUpload"> 
-                                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                        <span><i class="fa fa-upload"></i> Tải ảnh lên</span>
                                         {{p_form.image}}
                                       </div>
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label>Full Name</label>	
+                                <label>Họ và tên</label>	
                                 {{p_form.full_name}}					
                             </div>
 
@@ -39,32 +39,32 @@
                                 {{u_form.email}}					
                             </div>
                             <div class="col-md-4">
-                                <label>Mobile</label>	
+                                <label>Số điện thoại</label>	
                                 {{p_form.phone}}					
                             </div>
                             <div class="col-md-4">
-                                <label>Gender</label>	
+                                <label>Giới tính</label>	
                                 {{p_form.gender}}					
                             </div>
                             <div class="col-md-4">
-                                <label>Country</label>	
+                                <label>Quốc gia</label>	
                                 {{p_form.country}}					
                             </div>
                             <div class="col-md-4">
-                                <label>State</label>	
+                                <label>Bang</label>	
                                 {{p_form.state}}					
                             </div>
                             <div class="col-md-4">
-                                <label>City</label>	
+                                <label>Thành phố</label>	
                                 {{p_form.city}}					
                             </div>
                             <div class="col-md-4">
-                                <label>Address</label>	
+                                <label>Địa chỉ</label>	
                                 {{p_form.address}}					
                             </div>
                             
                             <div class="col-md-12">
-                                <button class="button preview btn_center_item margin-top-15" type="submit">Save Changes</button>
+                                <button class="button preview btn_center_item margin-top-15" type="submit">Lưu thay đổi</button>
                             </div>
                           </form>	
                       </div>

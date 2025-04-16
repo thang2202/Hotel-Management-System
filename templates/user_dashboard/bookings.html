@@ -5,7 +5,7 @@
 
     <!-- Dashboard -->
     <div id="dashboard">
-        <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Dashboard Sidebar Menu</a>
+        <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Menu của bảng điều khiển</a>
         {% include 'partials/dashboard_sidebar.html' %}
         <div class="utf_dashboard_content">
             
@@ -16,14 +16,14 @@
                     <div class="sort-by my_sort_by">
                         <div class="utf_sort_by_select_item">
                           <select data-placeholder="All Listing" class="utf_chosen_select_single">
-                            <option>All Orders</option>
-                            <option>Paid Orders</option>
-                            <option>UPaid Orders</option>
+                            <option>Tất cả các đơn</option>
+                            <option>Đơn đã thanh toán</option>
+                            <option>Đơn chưa thanh toán</option>
                             
                           </select>
                         </div>
                     </div>
-                    <h4>All Bookings</h4>
+                    <h4>Tất cả các đặt phòng</h4>
                     <ul>
                         
                         {% for b in bookings %}
@@ -33,52 +33,52 @@
                                     <div class="inner">
                                     <h3>{{b.full_name|title}} <span class="utf_booking_listing_status">{{b.payment_status|title}}</span></h3>
                                     <div class="utf_inner_booking_listing_list">
-                                        <h5>Booking Item: </h5>
+                                        <h5>Đặt hàng: </h5>
                                         <ul class="utf_booking_listing_list">
                                         <li>{{b.hotel.name}}</li>						  						  
                                         </ul>
                                     </div>
                                     <div class="utf_inner_booking_listing_list">
-                                        <h5>Checkin Date:</h5>
+                                        <h5>Ngày nhận phòng:</h5>
                                         <ul class="utf_booking_listing_list">
                                           <li class="highlighted">{{b.check_in_date}}</li>
                                         </ul>
                                       </div>
                                       <div class="utf_inner_booking_listing_list">
-                                        <h5>Checkout Date:</h5>
+                                        <h5>Ngày trả phòng:</h5>
                                         <ul class="utf_booking_listing_list">
                                           <li class="highlighted">{{b.check_out_date}}</li>
                                         </ul>
                                       </div>
                                       <div class="utf_inner_booking_listing_list">
-                                        <h5>Total Days:</h5>
+                                        <h5>Tổng số ngày:</h5>
                                         <ul class="utf_booking_listing_list">
-                                          <li class="highlighted">{{ b.total_days }} Days</li>
+                                          <li class="highlighted">{{ b.total_days }} ngày</li>
                                         </ul>
                                       </div>
                                       <div class="utf_inner_booking_listing_list">
-                                        <h5>Adults:</h5>
+                                        <h5>Người lớn:</h5>
                                         <ul class="utf_booking_listing_list">
-                                          <li class="highlighted">{{ b.num_adults }} Adults</li>
+                                          <li class="highlighted">{{ b.num_adults }} người</li>
                                         </ul>
                                       </div>
                                       <div class="utf_inner_booking_listing_list">
-                                        <h5>Children:</h5>
+                                        <h5>Trẻ em:</h5>
                                         <ul class="utf_booking_listing_list">
-                                          <li class="highlighted">{{ b.num_children }} Adults</li>
+                                          <li class="highlighted">{{ b.num_children }} người</li>
                                         </ul>
                                       </div>
                                    
                                     <div class="utf_inner_booking_listing_list">
-                                        <h5>Price:</h5>
+                                        <h5>Giá:</h5>
                                         <ul class="utf_booking_listing_list">
-                                            <li class="highlighted">${{b.total|floatformat:2}}</li>
+                                            <li class="highlighted">{{b.total|floatformat:0|intcomma}} ₫</li>
                                         </ul>
                                     </div>					  					  
                                     </div>
                                 </div>
                                 </div>
-                                <div class=""> <a href="{% url 'dashboard:booking_detail' b.booking_id %}" class="button gray reject"><i class="fas fa-eye"></i> View Booking Detail</a> </div>
+                                <div class=""> <a href="{% url 'dashboard:booking_detail' b.booking_id %}" class="button gray reject"><i class="fas fa-eye"></i> Xem chi tiết đặt phòng</a> </div>
                             </li>
                         {% endfor %}
                       

@@ -7,10 +7,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>{{room_type.type}} Room</h2>
+          <h2>Phòng {{room_type.type}}</h2>
           <nav id="breadcrumbs">
             <ul>
-              <li><p>{{rooms.count}} Available Rooms</p></li>
+              <li><p>{{rooms.count}} phòng có sẵn</p></li>
             </ul>
           </nav>
         </div>
@@ -23,7 +23,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="headline_part centered margin-bottom-20">All Available Rooms<span>The {{ room_type.type }} room has {{ rooms.count }} available room(s)</span></h3>
+          <h3 class="headline_part centered margin-bottom-20">Tất cả phòng có sẵn<span>Phòng {{ room_type.type }} có {{ rooms.count }} phòng trống</span></h3>
         </div>
       </div>
       <div class="row">  
@@ -32,17 +32,17 @@
           {% for r in rooms %}
               <div class="plan featured col-md-4 col-sm-6 col-xs-12">
               <div class="utf_price_plan">
-                  <h3>Room No. {{ r.room_number }}</h3>
-                  <span class="value">${{r.room_type.price}}<span>/Per Night</span></span> 
+                  <h3>Phòng số {{ r.room_number }}</h3>
+                  <span class="value">{{r.room_type.price}} ₫<span>/Mỗi đêm</span></span> 
               </div>
               <div class="utf_price_plan_features">
                   <ul>
-                  <li>Beds: {{r.room_type.number_of_beds}} </li>
-                  <li>Room Capacity: {{r.room_type.room_capacity}}</li>
+                  <li>Giường: {{r.room_type.number_of_beds}} </li>
+                  <li>Sức chứa phòng: {{r.room_type.room_capacity}}</li>
                   </ul>
                   <input type="hidden" class="room_id_{{r.id}}" value="{{r.id}}" id="room_id">
                   <input type="hidden" class="room_number_{{r.id}}" value="{{r.room_number}}" id="room_number">
-                  <button class="button border add-to-selection" data-index="{{r.id}}"><i class="fas fa-shopping-cart"></i> Add To Selection</button> 
+                  <button class="button border add-to-selection" data-index="{{r.id}}"><i class="fas fa-shopping-cart"></i> Thêm vào lựa chọn</button> 
               </div>
               </div>
           {% endfor %}
@@ -61,28 +61,28 @@
         </div>  
         <div class="col-lg-4">
             <div class=" booking_widget_box" style="border: 1px dashed rgba(42, 1, 119, 0.61); padding: 14px; border-radius: 10px;">
-              <h3><i class="fa fa-calendar"></i> Booking</h3>
+              <h3><i class="fa fa-calendar"></i> Đặt phòng</h3>
               <form class="row with-forms margin-top-0" method="POST" action="{% url 'booking:check_room_availability' %}">
                   {% csrf_token %}
                   <input type="hidden" value="{{hotel.id}}" name="hotel-id" id="">
                   <div class="col-lg-12 col-md-12 select_date_box">
-                      <label for="">Check-in Date</label>
+                      <label for="">Ngày nhận phòng</label>
                       <input type="date" id="date-picker" value="{{checkin}}" name="checkin" placeholder="Select Date">
                   </div>
                   <div class="col-lg-12 col-md-12 select_date_box">
-                      <label for="">Check-out Date</label>
+                      <label for="">Ngày trả phòng</label>
                       <input type="date" class="checkout_date" name="checkout" value="{{checkout}}"  placeholder="Select Date">
                   </div>
                   <div class="with-forms">
                       <div class="col-lg-12 col-md-12">
-                          <a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
+                          <a href="#">Khách <span class="qtyTotal" name="qtyTotal">1</span></a>
                           <div class="panel-dropdown-content">
                               <div class="qtyButtons">
-                                  <div class="qtyTitle">Adults</div>
+                                  <div class="qtyTitle">Người lớn</div>
                                   <input type="text" name="adult" {% if adult == None %}value="1"{% else %}value="{{adult}}"{% endif %}>
                               </div>
                               <div class="qtyButtons">
-                                  <div class="qtyTitle">Childrens</div>
+                                  <div class="qtyTitle">Trẻ em</div>
                                   <input type="text" name="children" {% if children == None %}value="1"{% else %}value="{{children}}"{% endif %}>
                               </div>
                           </div>
@@ -91,7 +91,7 @@
 
                   <div class="with-forms margin-top-30">
                       <div class="col-lg-12 col-md-12 ">
-                          <a href="#">Select Room Type</a>
+                          <a href="#">Chọn loại phòng</a>
                           <select name="room-type" class="utf_chosen_select_single" required>
                               <!-- <option value="{{room_type|lower}}">{{room_type}}</option> -->
                               <option value="{{room_type|lower}}">{{room_type}}</option>
@@ -103,9 +103,9 @@
                       </div>
                   </div>
                 
-                  <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Check Availability</button>
+                  <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Kiểm tra tình trạng</button>
               </form>
-              <button class="like-button add_to_wishlist"><span class="like-icon"></span> Add to Wishlist</button>
+              <button class="like-button add_to_wishlist"><span class="like-icon"></span> Thêm vào danh sách mong muốn</button>
               <div class="clearfix"></div>
             </div>
         </div>      

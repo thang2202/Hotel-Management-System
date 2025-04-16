@@ -25,7 +25,7 @@
                             <span class="call_now"><i class="fas fa-phone"></i> {{hotel.mobile}} </span>
                             <div class="utf_star_rating_section" data-rating="{{hotel.average_rating}}">
                                 {% if hotel.average_rating == None %}
-                                    <div class="utf_counter_star_rating">No Reviews Yet</div>
+                                    <div class="utf_counter_star_rating">Chưa có đánh giá nào</div>
                                 {% else %}
                                     <div class="utf_counter_star_rating">({{hotel.average_rating}}) / ({{hotel.rating_count}} Reviews) </div>
                                 {% endif %}
@@ -42,10 +42,10 @@
                                 {% if request.user.is_authenticated %}
                                 
                                     {% if not reviews %}
-                                        <a href="#small-dialog" class=" popup-with-zoom-anim" id="add-review-button"><i class="fa fa-star"> </i>Add Review</a></li>
+                                        <a href="#small-dialog" class=" popup-with-zoom-anim" id="add-review-button"><i class="fa fa-star"> </i>Thêm Đánh giá</a></li>
                                         <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
                                             <div class="small_dialog_header">
-                                            <h3 class="review_text">Write a review</h3>
+                                            <h3 class="review_text">Viết bài đánh giá</h3>
                                             </div>
                                             <div class="utf_message_reply_block margin-top-0" id="review_div">
                                             <textarea cols="40" rows="3" id="review-input" placeholder="Your Message..."></textarea>
@@ -56,14 +56,14 @@
                                                 <option value="4">★★★★☆</option>
                                                 <option value="5">★★★★★</option>
                                             </select>
-                                            <button data-hotel="{{hotel.id}}" class="button" id="review-btn">Reply Message</button>
+                                            <button data-hotel="{{hotel.id}}" class="button" id="review-btn">Trả lời</button>
                                             </div>
                                         </div>
                                     {% endif %}
                                 {% else %}
-                                    <li><a href="{% url 'userauths:sign-in' %}?next={{request.path}}"><i class="fa fa-sign-in"></i> Login to Write Review</a></li>
+                                    <li><a href="{% url 'userauths:sign-in' %}?next={{request.path}}"><i class="fa fa-sign-in"></i> Đăng nhập để viết đánh giá</a></li>
                                 {% endif %}
-                                <li><a style="cursor: pointer;" id="clipboard"><i class="fa fa-share"></i> Share</a></li>
+                                <li><a style="cursor: pointer;" id="clipboard"><i class="fa fa-share"></i> Chia sẻ</a></li>
                                 <script>
                                     var $temp = $("<input>");
                                     var $url = $(location).attr('href');
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div id="utf_listing_overview" class="utf_listing_section">
-                        <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30">Description</h3>
+                        <h3 class="utf_listing_headline_part margin-top-30 margin-bottom-30">Mô tả</h3>
                         <p>{{hotel.description|safe}} </p>
                         <div id="utf_listing_tags" class="utf_listing_section listing_tags_section margin-bottom-10 margin-top-0">
                             <a href="#"><i class="fas fa-phone" aria-hidden="true"></i> {{hotel.mobile}} </a>
@@ -97,7 +97,7 @@
                     </div>
 
                     <div id="utf_listing_tags" class="utf_listing_section listing_tags_section">
-                        <h3 class="utf_listing_headline_part margin-top-40 margin-bottom-40">Tags</h3>
+                        <h3 class="utf_listing_headline_part margin-top-40 margin-bottom-40">Nhãn</h3>
                         
                         {% for h in hotel.tags.all %}
                         <a href="#"><i class="fa fa-tag" aria-hidden="true"></i>{{h}}</a>
@@ -107,10 +107,10 @@
                     </div>
 
                     <div class="utf_listing_section">
-                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Pricing</h3>
+                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Giá cả</h3>
                         <div class="show-more">
                             <div class="utf_pricing_list_section">
-                                <h4>Room Types</h4>
+                                <h4>Loại phòng</h4>
                                 <ul>
                                     
                                     {% for r in hotel.hotel_room_types %}
@@ -119,8 +119,8 @@
                                                 {{r.type}} {{r.rid}} 
                                                 <!-- <sub class="ppl-offer label-light-success">20% Off</sub> -->
                                             </h5>
-                                            <p><strong>Beds :</strong> {{r.number_of_beds}} - <strong>Rooms:</strong> {{ r.rooms_count }}</p>
-                                            <span>${{r.price}}</span>
+                                            <p><strong>Giường :</strong> {{r.number_of_beds}} - <strong>Phòng:</strong> {{ r.rooms_count }}</p>
+                                            <span>{{r.price}} ₫</span>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -130,7 +130,7 @@
                     </div>
 
                     <div id="utf_listing_amenities" class="utf_listing_section">
-                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Amenities</h3>
+                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Tiện nghi</h3>
                         <ul class="utf_listing_features checfkboxes margin-top-0">
                             
                             {% for h in hotel.hotel_features %}
@@ -152,7 +152,7 @@
                     </div>
 
                     <div id="utf_listing_faq" class="utf_listing_section">
-                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">FAQ's</h3>
+                        <h3 class="utf_listing_headline_part margin-top-50 margin-bottom-40">Câu hỏi thường gặp</h3>
                         <div class="style-2">
                             <div class="accordion">
                                 
@@ -170,7 +170,7 @@
 
                     
                     <div id="utf_listing_reviews" class="utf_listing_section">
-                        <h3 class="utf_listing_headline_part margin-top-75 margin-bottom-20">Reviews <span>({{all_reviews.count}})</span></h3>
+                        <h3 class="utf_listing_headline_part margin-top-75 margin-bottom-20">Đánh giá <span>({{all_reviews.count}})</span></h3>
                         <div class="clearfix"></div>
                         <div class="reviews-container">
                             <div class="row">
@@ -178,7 +178,7 @@
                                     <div id="review_summary">
                                         
                                         {% if hotel.average_rating == None %}
-                                        <strong>Not Rated Yet</strong>
+                                        <strong>Chưa được đánh giá</strong>
                                         {% else %}
                                         <strong>{{hotel.average_rating}}/5</strong>
                                         {% endif %}
@@ -206,7 +206,7 @@
                                 <li>
                                     <div class="utf_comment_content">
                                         <div class="utf_arrow_comment"></div>
-                                        <div class="utf_by_comment">No Reviews Yet</div>
+                                        <div class="utf_by_comment">Chưa có đánh giá nào</div>
                                         
                                     </div>
                                 </li>
@@ -220,28 +220,28 @@
                 <div class="col-lg-4 col-md-4 margin-top-75 sidebar-search">
                     <!-- <div class="verified-badge with-tip margin-bottom-30" data-tip-content="Purchase ticket has been verified and belongs business owner or manager."> <i class="fas fa-check-circle"></i> Now Available</div> -->
                     <div class="utf_box_widget booking_widget_box">
-                        <h3><i class="fa fa-calendar"></i> Booking</h3>
+                        <h3><i class="fa fa-calendar"></i> Đặt phòng</h3>
                         <form class="row with-forms margin-top-0" method="POST" action="{% url 'booking:check_room_availability' %}">
                             {% csrf_token %}
                             <input type="hidden" value="{{hotel.id}}" name="hotel-id" id="">
                             <div class="col-lg-12 col-md-12 select_date_box">
-                                <label for="">Check-in Date</label>
+                                <label for="">Ngày nhận phòng</label>
                                 <input type="date" id="date-picker" name="checkin" placeholder="Select Date">
                             </div>
                             <div class="col-lg-12 col-md-12 select_date_box">
-                                <label for="">Check-out Date</label>
+                                <label for="">Ngày trả phòng</label>
                                 <input type="date" name="checkout" id="date-picker" placeholder="Select Date">
                             </div>
                             <div class="with-forms">
                                 <div class="col-lg-12 col-md-12">
-                                    <a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
+                                    <a href="#">Khách <span class="qtyTotal" name="qtyTotal">1</span></a>
                                     <div class="panel-dropdown-content">
                                         <div class="qtyButtons">
-                                            <div class="qtyTitle">Adults</div>
+                                            <div class="qtyTitle">Người lớn</div>
                                             <input type="text" name="adult" value="1">
                                         </div>
                                         <div class="qtyButtons">
-                                            <div class="qtyTitle">Childrens</div>
+                                            <div class="qtyTitle">Trẻ em</div>
                                             <input type="text" name="children" value="1">
                                         </div>
                                     </div>
@@ -250,9 +250,9 @@
 
                             <div class="with-forms margin-top-30">
                                 <div class="col-lg-12 col-md-12 ">
-                                    <a href="#">Select Room Type</a>
+                                    <a href="#">Chọn loại phòng</a>
                                     <select name="room-type" class="utf_chosen_select_single" required>
-                                        <option value="">Select Room</option>
+                                        <option value="">Chọn phòng</option>
                                         {% for r in hotel.hotel_room_types %}
                                             <option value="{{r.slug}}">{{r.type}}</option>
                                         {% endfor %}
@@ -260,18 +260,18 @@
                                 </div>
                             </div>
                            
-                            <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Check Availability</button>
+                            <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Kiểm tra tình trạng</button>
                         </form>
-                        <button class="like-button add_to_wishlist"><span class="like-icon"></span> Add to Wishlist</button>
+                        <button class="like-button add_to_wishlist"><span class="like-icon"></span> Thêm vào danh sách mong muốn</button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="utf_box_widget margin-top-35">
-                        <h3><i class="fas fa-user"></i> Contact Info</h3>
+                        <h3><i class="fas fa-user"></i> Thông tin liên lạc</h3>
                         <div class="utf_hosted_by_user_title"> <a href="#" class="utf_hosted_by_avatar_listing"><img src="{{hotel.user.profile.image.url}}" style="object-fit: cover;" alt=""></a>
                             <h4>
                                 <a href="#">{{hotel.user.profile.full_name}}</a>
                                 <span> @{{ hotel.user.username }}</span>
-                                <span> Posted on: {{hotel.date|date:"d M, Y"}}</span>
+                                <span> Đăng trên: {{hotel.date|date:"d M, Y"}}</span>
                             </h4>
                         </div>
                         <ul class="utf_social_icon rounded margin-top-10">
@@ -286,43 +286,43 @@
                     </div>
 
                     <div class="utf_box_widget listing-share margin-top-35 margin-bottom-40 no-border">
-                        <h3><i class="fas fa-tag"></i> Bookmark Listing</h3>
-                        <span>{{all_reviews.count}} People Bookmarked This Hotel</span>
+                        <h3><i class="fas fa-tag"></i> Danh sách đánh dấu</h3>
+                        <span>{{all_reviews.count}} người đã đánh dấu khách sạn này</span>
                     </div>
                     <div class="utf_box_widget opening-hours review-avg-wrapper margin-top-35">
-                        <h3><i class="fas fa-star"></i> Rating Average </h3>
+                        <h3><i class="fas fa-star"></i> Xếp hạng trung bình </h3>
                         <div class="box-inner">
                             <div class="rating-avg-wrapper text-theme clearfix">
                                 {% if hotel.average_rating == None %}
-                                <div class="utf_counter_star_rating">No Reviews Yet</div>
+                                <div class="utf_counter_star_rating">Chưa có đánh giá nào</div>
 
                                 {% else %}
                                 <div class="rating-avg">{{hotel.average_rating}}</div>
                                 <div class="rating-after">
-                                    <div class="rating-mode">/5 ({{hotel.rating_count}} Reviews)</div>
+                                    <div class="rating-mode">/5 ({{hotel.rating_count}} đánh giá)</div>
                                     
                                 </div>
                                 {% endif %}
                             </div>
                             <div class="ratings-avg-wrapper">
                                 <div class="ratings-avg-item">
-                                    <div class="rating-label">Quality</div>
+                                    <div class="rating-label">Chất lượng</div>
                                     <div class="rating-value text-theme">5.0</div>
                                 </div>
                                 <div class="ratings-avg-item">
-                                    <div class="rating-label">Location</div>
+                                    <div class="rating-label">Vị trí</div>
                                     <div class="rating-value text-theme">4.5</div>
                                 </div>
                                 <div class="ratings-avg-item">
-                                    <div class="rating-label">Space</div>
+                                    <div class="rating-label">Không gian</div>
                                     <div class="rating-value text-theme">3.5</div>
                                 </div>
                                 <div class="ratings-avg-item">
-                                    <div class="rating-label">Service</div>
+                                    <div class="rating-label">Dịch vụ</div>
                                     <div class="rating-value text-theme">4.0</div>
                                 </div>
                                 <div class="ratings-avg-item">
-                                    <div class="rating-label">Price</div>
+                                    <div class="rating-label">Giá</div>
                                     <div class="rating-value text-theme">5.0</div>
                                 </div>
                             </div>

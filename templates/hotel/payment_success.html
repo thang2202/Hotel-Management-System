@@ -9,12 +9,12 @@
         <div class="col-md-12">
           <section id="not-found" class="center">
             <h2 class="margin-bottom-10"><i class="fas fa-check-circle" style="color: green;"></i></h2>
-            <p style="margin-top: 10px; color: black;"><b>Checkout & Payment Successfull!</b></p>
+            <p style="margin-top: 10px; color: black;"><b>Kiểm tra & Thanh toán thành công!</b></p>
             <div class="utf_error_description_part utf_ferror_description">  
-                <span class="f-primary animated v fadeInRight">We have sent your booking summary to <b>{{ booking.email }}. Thank you.</b></span> 
+                <span class="f-primary animated v fadeInRight">Chúng tôi đã gửi tóm tắt đặt phòng của bạn tới <b>{{ booking.email }}. Cảm ơn.</b></span> 
             </div>
-            <a href="{% url 'hotel:invoice' booking.booking_id %}" class="button margin-top-20">Visit Dashboard</a>
-            <a href="{% url 'hotel:invoice' booking.booking_id %}" target="_blank" class="button margin-top-20">View Invoice 🧾</a>
+            <a href="{% url 'hotel:invoice' booking.booking_id %}" class="button margin-top-20">Truy cập Bảng điều khiển</a>
+            <a href="{% url 'hotel:invoice' booking.booking_id %}" target="_blank" class="button margin-top-20">Xem hóa đơn 🧾</a>
             <div class="row">
               <div class="col-lg-6 col-lg-offset-3">
                 <div class="gray-style margin-top-50 margin-bottom-10">

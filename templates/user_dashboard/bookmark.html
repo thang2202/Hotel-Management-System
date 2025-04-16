@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <div id="dashboard">
-    <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Dashboard Sidebar Menu</a>
+    <a href="#" class="utf_dashboard_nav_responsive"><i class="fa fa-reorder"></i> Menu của bảng điều khiển</a>
     {% include 'partials/dashboard_sidebar.html' %}
     <div class="utf_dashboard_content">
         
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="utf_dashboard_list_box margin-top-0">
-                    <h4><i class="fas fa-heart"></i> All Bookmarked Hotels</h4>
+                    <h4><i class="fas fa-heart"></i> Tất cả các khách sạn đã đánh dấu</h4>
                     <ul>
                         
                         {% for b in bookmark %}
@@ -36,12 +36,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div> <a href="{% url 'dashboard:delete_bookmark' b.bid %}" class="button gray"><i class="fas fa-trash" style="color: red;"></i> Delete</a> </div>
+                                    <div> <a href="{% url 'dashboard:delete_bookmark' b.bid %}" class="button gray"><i class="fas fa-trash" style="color: red;"></i> Xóa</a> </div>
                                 </div>
                             </li>
                         {% empty %}
                         <li>
-                            <h6>No Bookmarks Yet</h6>
+                            <h6>Chưa có đánh dấu nào</h6>
                         </li>
                         {% endfor %}
                     </ul>
