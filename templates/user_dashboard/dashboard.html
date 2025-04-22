@@ -2,6 +2,7 @@
 {% extends 'partials/dashboard_base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
 
     <!-- Dashboard -->
     <div id="dashboard">
@@ -23,7 +24,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="utf_dashboard_stat color-2">
                         <div class="utf_dashboard_stat_content">
-                            <h4>{{total_spent.amount|floatformat:0}} ₫</h4>
+                            <h4>{{total_spent.amount|floatformat:0|intcomma}} ₫</h4>
                             <span>Tổng số tiền đã chi</span>
                         </div>
                         <div class="utf_dashboard_stat_icon"><i class="fas fa-dollar"></i></div>
@@ -33,7 +34,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="utf_dashboard_stat color-3">
                         <div class="utf_dashboard_stat_content">
-                            <h4>{{request.user.profile.wallet|floatformat:0}} ₫</h4>
+                            <h4>{{request.user.profile.wallet|floatformat:0|intcomma}} ₫</h4>
                             <span>Số dư ví</span>
                         </div>
                         <div class="utf_dashboard_stat_icon"><i class="fas fa-wallet"></i></div>

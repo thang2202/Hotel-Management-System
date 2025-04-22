@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="utf_user_menu">
-                                <div class="utf_user_name"><span><img src="{{request.user.profile.image.url}}" alt=""></span>Xin chào, {{request.user.username|title}}!</div>
+                                <div class="utf_user_name"><span><img src="{{request.user.profile.image.url}}" alt=""></span>Xin chào, {{request.user.full_name|title}}!</div>
                                 <ul>
                                     <li><a href="{% url 'dashboard:dashboard' %}">Bảng điêu khiển</a></li>
                                     <li><a href="{% url 'dashboard:dashboard' %}">Hồ sơ của tôi</a></li>

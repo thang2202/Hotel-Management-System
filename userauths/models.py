@@ -18,8 +18,8 @@ IDENTITY_TYPE = (
 )
 
 GENDER = (
-    ("female", "Female"),
-    ("male", "Male"),
+    ("female", "Nữ"),
+    ("male", "Nam"),
 )
 
 TITLE = (

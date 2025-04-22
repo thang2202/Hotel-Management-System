@@ -88,7 +88,7 @@ class Hotel(models.Model):
     image = models.FileField(upload_to="hotel_gallery")
     address = models.CharField(max_length=200)
     mobile = models.CharField(max_length=20)
-    email = models.CharField(max_length=100)
+    email = models.EmailField(null=True, blank=True)
     status = models.CharField(choices=HOTEL_STATUS, max_length=10, default="published", null=True, blank=True)
 
     tags = TaggableManager(blank=True)
@@ -295,7 +295,7 @@ class CouponUsers(models.Model):
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
     
     full_name = models.CharField(max_length=1000)
-    email = models.CharField(max_length=1000)
+    email = models.EmailField(null=True, blank=True)
     mobile = models.CharField(max_length=1000)
 
     def __str__(self):

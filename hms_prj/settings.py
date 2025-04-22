@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # Custom Apps
     'hotel',
@@ -200,11 +201,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 JAZZMIN_SETTINGS = {
-    'site_header': "Desphixs",
-    'site_brand': "Your #1 marketplace for collectibles.",
-    'site_logo': "/images/logo.png",
-    'copyright':  "All Right Reserved 2023",
-    "welcome_sign": "Welcome to Desphixs, Login Now.",
+    'site_header': "HTC",
+    'site_brand': "Xin chào",
+    'site_logo': "/images/logo.jpg",
+    'copyright':  "All Right Reserved 2025",
+    "welcome_sign": "Welcome to HTC, Login Now.",
     "topmenu_links": [
 
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},

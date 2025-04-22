@@ -12,7 +12,7 @@ from userauths.forms import UserRegisterForm
 
 def RegisterView(request, *args, **kwargs):
     if request.user.is_authenticated:
-        messages.warning(request, f"Hey {request.user.username}, you are already logged in")
+        messages.warning(request, f"Xin chào {request.user.full_name}, bạn vừa đăng nhập.")
         return redirect('hotel:index')   
 
     form = UserRegisterForm(request.POST or None)
@@ -26,7 +26,7 @@ def RegisterView(request, *args, **kwargs):
         user = authenticate(email=email, password=password)
         login(request, user)
 
-        messages.success(request, f"Hi {request.user.username}, your account have been created successfully.")
+        messages.success(request, f"Xin chào {request.user.full_name}, tài khoản của bạn đã được tạo thành công.")
 
         profile = Profile.objects.get(user=request.user)
         profile.full_name = full_name
@@ -53,19 +53,19 @@ def LoginView(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, "You are Logged In")
+                messages.success(request, "Bạn đã đăng nhập.")
                 return redirect('hotel:index')
             else:
-                messages.error(request, 'Username or password does not exit.')
+                messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
         
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Người dùng không tồn tại.')
 
     return HttpResponseRedirect("/")
 
 def loginViewTemp(request):
     if request.user.is_authenticated:
-        messages.warning(request, "You are already logged in")
+        messages.warning(request, "Bạn đã đăng nhập.")
         return redirect('hotel:index')
     
     if request.method == 'POST':
@@ -79,16 +79,16 @@ def loginViewTemp(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, "You are Logged In")
+                messages.success(request, "Bạn đã đăng nhập.")
                 # return redirect()
                 next_url = request.GET.get("next", 'hotel:index')
                 return redirect(next_url)
                 
             else:
-                messages.error(request, 'Username or password does not exit.')
+                messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
         
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Người dùng không tồn tại.')
 
     return render(request, "userauths/sign-in.html")
 
@@ -96,5 +96,5 @@ def loginViewTemp(request):
 
 def LogoutView(request):
     logout(request)
-    messages.success(request, 'You have been logged out')
+    messages.success(request, 'Bạn đã đăng xuất.')
     return redirect("userauths:sign-in")

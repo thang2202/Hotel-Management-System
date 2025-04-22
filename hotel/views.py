@@ -63,7 +63,7 @@ def room_type_detail(request, slug, rt_slug):
     print("checkin ======", checkin)
 
     if not all([checkin, checkout]):
-        messages.warning(request, "Please enter your booking data to check availability.")
+        messages.warning(request, "Vui lòng nhập dữ liệu đặt phòng của bạn để kiểm tra tình trạng phòng trống.")
         return redirect("booking:booking_data", hotel.slug)
 
     context = {
@@ -215,14 +215,14 @@ def selected_rooms(request):
 
         return render(request, "hotel/selected_rooms.html", context)
     else:
-        messages.warning(request, "You don't have any room selections yet!")
+        messages.warning(request, "Bạn chưa lựa chọn phòng nào!")
         return redirect("/")
 
 def checkout(request, booking_id):
     booking = Booking.objects.get(booking_id=booking_id)
 
     if booking.payment_status == "paid":
-        messages.success(request, "This order has been paid for!")
+        messages.success(request, "Đơn này đã được thanh toán!")
         return redirect("/")
     else:
         booking.payment_status = "processing"
@@ -238,7 +238,7 @@ def checkout(request, booking_id):
         try:
             coupon = Coupon.objects.get(code__iexact=code,valid_from__lte=now,valid_to__gte=now,active=True)
             if coupon in booking.coupons.all():
-                messages.warning(request, "Coupon Already Activated")
+                messages.warning(request, "Mã giảm giá đã được kích hoạt")
                 return redirect("hotel:checkout", booking.booking_id)
             else:
                 CouponUsers.objects.create(
@@ -260,10 +260,10 @@ def checkout(request, booking_id):
                 booking.save()
 
                 
-                messages.success(request, "Coupon Found and Activated")
+                messages.success(request, "Mã giảm giá đã được kích hoạt")
                 return redirect("hotel:checkout", booking.booking_id)
         except Coupon.DoesNotExist:
-            messages.error(request, "Coupon Not Found")
+            messages.error(request, "Không tìm thấy phiếu giảm giá.")
             return redirect("hotel:checkout", booking.booking_id)
     
     context = {
@@ -358,19 +358,19 @@ def payment_success(request, booking_id):
                 msg.send()
                     
             elif booking.payment_status == "paid":
-                messages.success(request, f'Your booking has been completed.')
+                messages.success(request, f'Đơn của bạn đã hoàn tất.')
                 return redirect("/")
             else:
-                messages.success(request, 'Opps... Internal Server Error; please try again later')
+                messages.success(request, 'Opps... Lỗi máy chủ nội bộ, vui lòng thử lại sau.')
                 return redirect("/")
                 
         else:
-            messages.error(request, "Error: Payment Manipulation Detected, This payment have been cancelled")
+            messages.error(request, "Lỗi: Phát hiện thanh toán lỗi. Thanh toán này đã bị hủy.")
             booking.payment_status = "failed"
             booking.save()
             return redirect("/")
     else:
-        messages.error(request, "Error: Payment Manipulation Detected, This payment have been cancelled")
+        messages.error(request, "Lỗi: Phát hiện thanh toán lỗi. Thanh toán này đã bị hủy.")
         booking = Booking.objects.get(booking_id=booking_id, success_id=success_id)
         booking.payment_status = "failed"
         booking.save()

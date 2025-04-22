@@ -2,6 +2,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
   
   <div id="titlebar" class="gradient">
     <div class="container">
@@ -33,7 +34,7 @@
               <div class="plan featured col-md-4 col-sm-6 col-xs-12">
               <div class="utf_price_plan">
                   <h3>Phòng số {{ r.room_number }}</h3>
-                  <span class="value">{{r.room_type.price}} ₫<span>/Mỗi đêm</span></span> 
+                  <span class="value">{{r.room_type.price|floatformat:0|intcomma}} ₫<span>/Mỗi đêm</span></span> 
               </div>
               <div class="utf_price_plan_features">
                   <ul>

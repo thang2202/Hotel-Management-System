@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -163,7 +164,7 @@
                             {% for r in room %}
                                 <tr>
                                     <td class="col-md-">{{r.room_type.type}}</td>
-                                    <td class="col-md-3"><i class="fa fa-inr"></i> {{r.room_type.price}} ₫</td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> {{r.room_type.price|floatformat:0|intcomma}} ₫</td>
                                 </tr>
                             {% endfor %}
                             
@@ -192,7 +193,7 @@
                                 <p class="mb-2"><b>VAT: </b> $0.00</p>
                                 
                                 {% if booking.saved != 0.00 %}
-                                    <p class="mb-2 text-danger"><b>Chiết khấu: </b> -{{booking.saved}} ₫</p>
+                                    <p class="mb-2 text-danger"><b>Chiết khấu: </b> -{{booking.saved|floatformat:0|intcomma}} ₫</p>
                                 {% endif %}
                                 <hr />
 

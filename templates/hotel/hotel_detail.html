@@ -2,6 +2,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
         <div class="clearfix"></div>
         <div id="utf_listing_gallery_part" class="utf_listing_section">
             <div class="utf_listing_slider utf_gallery_container margin-bottom-0">
@@ -120,7 +121,7 @@
                                                 <!-- <sub class="ppl-offer label-light-success">20% Off</sub> -->
                                             </h5>
                                             <p><strong>Giường :</strong> {{r.number_of_beds}} - <strong>Phòng:</strong> {{ r.rooms_count }}</p>
-                                            <span>{{r.price}} ₫</span>
+                                            <span>{{r.price|floatformat:0|intcomma}} ₫</span>
                                         </li>
                                     {% endfor %}
                                 </ul>

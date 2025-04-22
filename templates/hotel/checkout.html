@@ -2,6 +2,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
   
 <div id="main_wrapper">
   
@@ -39,7 +40,7 @@
                                 <li>
                                     <h5>Phòng: {{r.room_type.type}} </h5>
                                     <p><strong>Giường :</strong> {{r.number_of_beds}}  </p>
-                                    <span>{{r.room_type.price}} ₫ </span>
+                                    <span>{{r.room_type.price|floatformat:0|intcomma}} ₫ </span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -93,10 +94,10 @@
 			      <li>Trả phòng <span>{{booking.check_out_date}}</span></li>            
             <li>Người lớn <span>{{ booking.num_adults }} người lớn</span></li>
             <li>Trẻ em <span>{{ booking.num_children }} trẻ em</span></li>
-			      <li>V.A.T <span>$0.00</span></li>
+			      <li>V.A.T <span>0 ₫</span></li>
             
             {% if booking.saved != 0.00 %}
-			      <li>Chiết khấu<span>-{{booking.saved}} ₫</span></li>
+			      <li>Chiết khấu<span>-{{booking.saved|floatformat:0|intcomma}} ₫</span></li>
             {% endif %}
 
             <li class="total-costs">
@@ -111,7 +112,7 @@
               </form>
               <div class="clearfix"></div>
             </li>
-            <li class="total-costs">Tổng chi phí <span>{{booking.total}} ₫</span></li>
+            <li class="total-costs">Tổng chi phí <span>{{booking.total|floatformat:0|intcomma}} ₫</span></li>
           </ul>
           <form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
                <input type="hidden" name="public_key" value="FLWPUBK_TEST-a2c377d3cf56b37b9e660f85e26d2f8f-X" />

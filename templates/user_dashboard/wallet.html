@@ -2,6 +2,7 @@
 {% extends 'partials/dashboard_base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
 
     <!-- Dashboard -->
     <div id="dashboard">
@@ -15,7 +16,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="utf_dashboard_stat color-5">
                         <div class="utf_dashboard_stat_content">
-                            <h4>{{total_spent.amount|floatformat:0}} ₫</h4>
+                            <h4>{{total_spent.amount|floatformat:0|intcomma}} ₫</h4>
                             <span>Tổng số tiền đã chi</span>
                         </div>
                         <div class="utf_dashboard_stat_icon"><i class="fas fa-dollar"></i></div>
@@ -25,7 +26,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="utf_dashboard_stat color-2">
                         <div class="utf_dashboard_stat_content">
-                            <h4>{{request.user.profile.wallet|floatformat:0}} ₫</h4>
+                            <h4>{{request.user.profile.wallet|floatformat:0|intcomma}} ₫</h4>
                             <span>Số dư ví</span>
                         </div>
                         <div class="utf_dashboard_stat_icon"><i class="fas fa-wallet"></i></div>
@@ -40,11 +41,11 @@
                         <ul>
                             
                             {% for b in bookings %}
-                                <li><i class="fas fa-receipt"></i> <strong>{{b.hotel.name}} <span class="paid">{{b.payment_status|title}} {{ b.total|floatformat:0 }} ₫</span></strong>
+                                <li><i class="fas fa-receipt"></i> <strong>{{b.hotel.name}} <span class="paid">{{b.payment_status|title}} {{ b.total|floatformat:0|intcomma }} ₫</span></strong>
                                     <ul>
                                         <li><span>Mã đơn: </span> {{b.booking_id}}</li>
                                         <li><span>Ngày: </span> {{b.date|date:"d M, Y"}}</li>
-                                        <li><span>Đã tiêu: </span> {{ b.total|floatformat:0 }} ₫</li>
+                                        <li><span>Đã tiêu: </span> {{ b.total|floatformat:0|intcomma }} ₫</li>
                                     </ul>
                                 </li>
                             {% endfor %}

@@ -2,6 +2,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+{% load humanize %}
   
 <div id="main_wrapper" class="selection-list">
   
@@ -36,7 +37,7 @@
                                 <li>
                                     <h5>Phòng: {{item.room_name}}  <small><a style="cursor: pointer;" class="delete-item" data-item="{{ id }}"><i class="fas fa-trash" style="color: red;"></i></a></small> </h5>
                                     <p><strong>Giường :</strong> {{item.number_of_beds}}  </p>
-                                    <span>{{item.room_price}} ₫ </span>
+                                    <span>{{item.room_price|floatformat:0|intcomma}} ₫ </span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -138,8 +139,8 @@
 			      <li>Tổng số ngày <span>{{total_days}} ngày</span></li>            
             <li>Người lớn <span>{{ adult }} người lớn</span></li>
             <li>Children <span>{{ children }} trẻ em</span></li>
-			      <li>V.A.T <span>$0.00</span></li>
-            <li class="total-costs">Tổng chi phí <span>{{total}} ₫</span></li>
+			      <li>V.A.T <span>0 ₫</span></li>
+            <li class="total-costs">Tổng chi phí <span>{{total|floatformat:0|intcomma}} ₫</span></li>
           </ul>
         </div>
       </div>
