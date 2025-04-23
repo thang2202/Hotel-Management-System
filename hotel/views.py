@@ -16,8 +16,8 @@ from hotel.models import Coupon, CouponUsers, Hotel, Room, Booking, RoomServices
 
 from datetime import datetime
 from decimal import Decimal
-import stripe
 import json
+import requests
 
 
 def index(request):
@@ -290,46 +290,63 @@ def checkout(request, booking_id):
             return redirect("hotel:checkout", booking.booking_id)
     
     context = {
-        "booking":booking,  
-        "stripe_publishable_key":settings.STRIPE_PUBLIC_KEY,
-        "flutter_publick_key":settings.FLUTTERWAVE_PUBLIC,
+        "booking":booking, 
         "website_address":settings.WEBSITE_ADDRESS,
     }
     return render(request, "hotel/checkout.html", context)
 
 
+def momo_payment(request, booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+    momo_api_url = "https://test-payment.momo.vn/v2/gateway/api/create"
+    payload = {
+        "amount": booking.total,
+        "orderId": booking.booking_id,
+        "redirectUrl": request.build_absolute_uri(reverse('hotel:payment_success', args=[booking.booking_id])),
+        "ipnUrl": request.build_absolute_uri(reverse('hotel:payment_callback')),
+    }
+    response = requests.post(momo_api_url, json=payload)
+    return redirect(response.json().get('payUrl'))
+
+def zalopay_payment(request, booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+    zalopay_api_url = "https://sandbox.zalopay.vn/v001/tpe/createorder"
+    payload = {
+        "amount": booking.total,
+        "order_id": booking.booking_id,
+        "callback_url": request.build_absolute_uri(reverse('hotel:payment_success', args=[booking.booking_id])),
+    }
+    response = requests.post(zalopay_api_url, json=payload)
+    return redirect(response.json().get('order_url'))
+
+def vnpay_payment(request, booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+    vnpay_api_url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
+    payload = {
+        "vnp_Amount": int(booking.total * 100),
+        "vnp_OrderInfo": booking.booking_id,
+        "vnp_ReturnUrl": request.build_absolute_uri(reverse('hotel:payment_success', args=[booking.booking_id])),
+        "vnp_IpnUrl": request.build_absolute_uri(reverse('hotel:payment_callback')),
+    }
+    response = requests.post(vnpay_api_url, json=payload)
+    return redirect(response.url)
+
+
 @csrf_exempt
-def create_checkout_session(request, booking_id):
-    request_data = json.loads(request.body)
-    booking = get_object_or_404(Booking, booking_id=booking_id)
+def payment_callback(request):
+    data = request.POST
+    booking_id = data.get("orderId") or data.get("order_id")
+    status = data.get("status")
+    booking = Booking.objects.get(booking_id=booking_id)
 
-    stripe.api_key = settings.STRIPE_PRIVATE_KEY
-    checkout_session = stripe.checkout.Session.create(
-        customer_email = booking.email,
-        payment_method_types=['card'],
-        line_items=[
-            {
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                    'name': booking.full_name,
-                    },
-                    'unit_amount': int(booking.total * 100),
-                },
-                'quantity': 1,
-            }
-        ],
-        mode='payment',
-        success_url=request.build_absolute_uri(reverse('hotel:success', args=[booking.booking_id])) + "?session_id={CHECKOUT_SESSION_ID}&success_id="+booking.success_id+'&booking_total='+str(booking.total),
-        cancel_url=request.build_absolute_uri(reverse('hotel:failed', args=[booking.booking_id]))+ "?session_id={CHECKOUT_SESSION_ID}",
-    )
+    if status == "success":
+        booking.payment_status = "paid"
+        booking.save()
+    elif status == "failed":
+        booking.payment_status = "failed"
+        booking.save()
 
-    booking.payment_status = "processing"
-    booking.stripe_payment_intent = checkout_session['id']
-    booking.save()
-
-    print("checkout_session ==============", checkout_session)
-    return JsonResponse({'sessionId': checkout_session.id})
+    return JsonResponse({"message": "Payment status updated."})
 
 
 def payment_success(request, booking_id):

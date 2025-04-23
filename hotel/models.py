@@ -240,9 +240,11 @@ class Booking(models.Model):
     checked_out_tracker = models.BooleanField(default=False, help_text="DO NOT CHECK THIS BOX")
     date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     coupons = models.ManyToManyField("hotel.Coupon", blank=True)
-    stripe_payment_intent = models.CharField(max_length=200,null=True, blank=True)
     success_id = ShortUUIDField(length=300, max_length=505, alphabet="abcdefghijklmnopqrstuvxyz1234567890")
     booking_id = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvxyz")
+    momo_transaction_id = models.CharField(max_length=100, null=True, blank=True)
+    zalopay_transaction_id = models.CharField(max_length=100, null=True, blank=True)
+    vnpay_transaction_id = models.CharField(max_length=100, null=True, blank=True)
 
 
     def __str__(self):

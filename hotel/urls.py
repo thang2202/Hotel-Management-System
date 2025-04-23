@@ -16,7 +16,11 @@ urlpatterns = [
     path("update_room_status/", views.update_room_status, name="update_room_status"),
 
     # API và thanh toán
-    path('api/checkout-session/<booking_id>/', views.create_checkout_session, name='api_checkout_session'),
+    path('payment/callback/', views.payment_callback, name='payment_callback'),
+    path('payment/success/<str:booking_id>/', views.payment_success, name='payment_success'),
+    path('payment/momo/<str:booking_id>/', views.momo_payment, name='momo_payment'),
+    path('payment/zalopay/<str:booking_id>/', views.zalopay_payment, name='zalopay_payment'),
+    path('payment/vnpay/<str:booking_id>/', views.vnpay_payment, name='vnpay_payment'),
     path('success/<booking_id>/', views.payment_success, name='success'),
     path('failed/<booking_id>/', views.payment_failed, name='failed'),
 
