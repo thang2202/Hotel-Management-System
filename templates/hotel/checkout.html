@@ -53,7 +53,7 @@
 			<div class="row">
 			  <div class="col-md-12">
 				<label>Tên</label>
-				<input name="full_name" type="text" value="{{booking.full_name}}" readonly placeholder="First Name">
+				<input name="full_name" type="text" value="{{booking.full_name}}" readonly placeholder="Tên">
 			  </div>
 			  <div class="col-md-6">
 				<div class="medium-icons">
@@ -104,7 +104,7 @@
               <form action="" method="POST">
                 {% csrf_token %}
                 <div class="col-md-8">
-                  <input id="couponCode" name="code" placeholder="Have a coupon enter here..." required="" type="text">
+                  <input id="couponCode" name="code" placeholder="Hãy nhập mã giảm giá vào đây..." required="" type="text">
                 </div>
                 <div class="col-md-4">
                   <input type="submit" class="coupon_code" value="Apply">	
@@ -150,11 +150,11 @@
 
         var email = document.getElementById('email').value;
         if (email.length == 0) {
-            alert("Please enter your email address.");
+            alert("Vui lòng nhập email.");
             return;
         }
 
-        checkoutButton.innerHTML = "Starting..."
+        checkoutButton.innerHTML = "Bắt đầu..."
         
         fetch("{% url 'hotel:api_checkout_session' booking_id=booking.booking_id %}", {
             method: 'POST',

@@ -44,6 +44,11 @@ def index(request):
     }
     return render(request, "hotel/index.html", context)
 
+def dashboard(request):
+    """
+    View hiển thị dashboard.
+    """
+    return render(request, "user_dashboard/dashboard.html", {})
 
 def hotel_detail(request, slug):
     hotel = Hotel.objects.get(status="Live", slug=slug)
@@ -281,7 +286,7 @@ def checkout(request, booking_id):
                 messages.success(request, "Mã giảm giá đã được kích hoạt")
                 return redirect("hotel:checkout", booking.booking_id)
         except Coupon.DoesNotExist:
-            messages.error(request, "Không tìm thấy phiếu giảm giá.")
+            messages.error(request, "Không tìm thấy mã giảm giá.")
             return redirect("hotel:checkout", booking.booking_id)
     
     context = {

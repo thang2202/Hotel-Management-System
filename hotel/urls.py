@@ -1,21 +1,27 @@
 from django.urls import path 
-from hotel import views 
+from django.urls import path
+from hotel import views
 
 app_name = "hotel"
 
 urlpatterns = [
+    # Trang chính
     path("", views.index, name="index"),
-    path("selected_rooms/", views.selected_rooms, name="selected_rooms"),
-    path('<slug:slug>/', views.hotel_detail, name='hotel_detail'),
-    path("detail/<slug:slug>/", views.hotel_detail, name="detail"),
-    path("detail/<slug:slug>/room-type/<slug:rt_slug>/", views.room_type_detail, name="room_type_detail"),
+
+    # Các URL cụ thể
+    path("dashboard/", views.dashboard, name="dashboard"),
     path("selected_rooms/", views.selected_rooms, name="selected_rooms"),
     path("checkout/<booking_id>/", views.checkout, name="checkout"),
     path("invoice/<booking_id>/", views.invoice, name="invoice"),
     path("update_room_status/", views.update_room_status, name="update_room_status"),
-    
-    # Payment API
+
+    # API và thanh toán
     path('api/checkout-session/<booking_id>/', views.create_checkout_session, name='api_checkout_session'),
     path('success/<booking_id>/', views.payment_success, name='success'),
     path('failed/<booking_id>/', views.payment_failed, name='failed'),
+
+    # Chi tiết khách sạn và các chức năng liên quan
+    path("detail/<slug:slug>/", views.hotel_detail, name="detail"),
+    path("detail/<slug:slug>/room-type/<slug:rt_slug>/", views.room_type_detail, name="room_type_detail"),
+    path('<slug:slug>/', views.hotel_detail, name='hotel_detail'),  # Đặt cuối cùng để tránh xung đột
 ]
