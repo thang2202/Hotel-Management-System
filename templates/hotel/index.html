@@ -10,74 +10,115 @@
                         <div class="col-md-12">
                             <h2>Đặt những trải nghiệm độc đáo</h2>
                             <h4>Khám phá những khách sạn, cửa hàng và nhà hàng được đánh giá cao nhất tại Việt Nam</h4>
-                            <div class="main_input_search_part">
-                                <div class="main_input_search_part_item">
-                                    <input type="text" placeholder="Khách sạn, Thành phố..." value="" />
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <div class="main_input_search_part">
+                                    <div class="main_input_search_part_item">
+                                        <input type="text" name="hotel_name" placeholder="Khách sạn, Thành phố..." value="" />
+                                    </div>
+                                    <div class="main_input_search_part_item main-search-input-item search-input-icon">
+                                        <input type="text" name="booking_date" placeholder="Chọn ngày đặt phòng" id="booking-date-search">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="main_input_search_part_item intro-search-field">
+                                        <select name="tags" class="selectpicker default" title="Tất cả các danh mục" data-live-search="true">
+                                            <option value="">Tất cả các danh mục</option>
+                                            <option value="Thực phẩm & Nhà hàng">Thực phẩm & Nhà hàng</option>
+                                            <option value="Cửa hàng & Giáo dục">Cửa hàng & Giáo dục</option>
+                                            <option value="Giáo dục">Giáo dục</option>
+                                            <option value="Thương mại">Thương mại</option>
+                                            <option value="Sự kiện">Sự kiện</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="button">Tìm kiếm</button>
                                 </div>
-                                <div class="main_input_search_part_item main-search-input-item search-input-icon">
-                                    <input type="text" placeholder="Chọn ngày đặt phòng" id="booking-date-search">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <div class="main_input_search_part_item intro-search-field">
-                                    <select data-placeholder="All Categories" class="selectpicker default" title="Tất cả các danh mục" data-live-search="true" data-selected-text-format="count" data-size="5">
-							  <option>Thực phẩm & Nhà hàng </option>
-							  <option>Cửa hàng & Giáo dục</option>
-							  <option>Giáo dục</option>
-							  <option>Thương mại</option>
-							  <option>Sự kiện</option>
-							</select>
-                                </div>
-                                <button class="button" >Tìm kiếm</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
+        <section class="search-results-section margin-top-65 padding-top-75 padding-bottom-70">
             <div class="container">
-                <div class="row slick_carousel_slider">
-                    <div class="col-md-12">
-                        <h3 class="headline_part centered margin-bottom-45">Các tour du lịch phổ biến của chúng tôi <span>Khám phá những địa điểm tuyệt vời nhất trong thành phố</span> </h3>
-                    </div>
-
-                    <div class="row">
-                       
-                                {% for h in hotel %}
+                {% if search_results is not None %}
+                    <div class="search-results">
+                        {% if search_results %}
+                            <h3 class="headline_part centered margin-bottom-45">
+                                Kết quả tìm kiếm
+                                <span>Những khách sạn phù hợp với tìm kiếm của bạn</span>
+                            </h3>
+                            <div class="row">
+                                {% for h in search_results %}
                                     <div class="col-lg-4">
-                                        <a href="{% url 'hotel:detail' h.slug %}" class="utf_listing_item-container compact">
-                                            <div class="utf_listing_item"> <img src="{{h.image.url}}" alt=""> 
-                                                <!-- <span class="tag"> <i class="im im-icon-Chef-Hat"></i> Restaurant </span>  -->
-                                                <!-- <span class="featured_tag">Featured</span> -->
+                                        <a href="{% url 'hotel:hotel_detail' h.slug %}" class="utf_listing_item-container compact">
+                                            <div class="utf_listing_item">
+                                                <img src="{{ h.image.url }}" alt="">
                                                 <span class="utf_open_now">Đang mở</span>
                                                 <div class="utf_listing_item_content">
-                                                    <div class="utf_listing_prige_block">
-                                                        <!-- <span class="utf_meta_listing_price"><i class="fa fa-tag"></i> $25 - $55</span> -->
-                                                        <!-- <span class="utp_approve_item"><i class="utf_approve_listing"></i></span> -->
-                                                    </div>
-                                                    <h3>{{h.name|truncatechars:20}}</h3>
-                                                    <span><i class="fas fa-location-arrow"></i> {{h.address}}</span>
-                                                    <span><i class="fas fa-phone"></i> {{h.mobile}}</span>
+                                                    <h3>{{ h.name|truncatechars:20 }}</h3>
+                                                    <span><i class="fas fa-location-arrow"></i> {{ h.address }}</span>
+                                                    <span><i class="fas fa-phone"></i> {{ h.mobile }}</span>
                                                 </div>
                                             </div>
-                                            <div class="utf_star_rating_section" data-rating="{{h.average_rating}}">
-                                                
+                                            <div class="utf_star_rating_section" data-rating="{{ h.average_rating }}">
                                                 {% if h.average_rating == None %}
-                                                <div class="utf_counter_star_rating">Chưa có đánh giá nào</div>
+                                                    <div class="utf_counter_star_rating">Chưa có đánh giá nào</div>
                                                 {% else %}
-                                                <div class="utf_counter_star_rating">{{h.average_rating}}/5 ({{h.rating_count}} reviews) </div>
+                                                    <div class="utf_counter_star_rating">
+                                                        {{ h.average_rating }}/5 ({{ h.rating_count }} reviews)
+                                                    </div>
                                                 {% endif %}
-                                                    
-                                                <span class="utf_view_count"> {{h.views}}</span>
-                                                <span class="like-icon add-to-bookmark-{{h.id}}" data-hotel="{{h.id}}" id="add-to-bookmark"></span>
+                                                <span class="utf_view_count">{{ h.views }}</span>
                                             </div>
                                         </a>
                                     </div>
                                 {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>Không tìm thấy khách sạn nào phù hợp với tìm kiếm.</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </section>
 
-                               
-                            
+        <section class="fullwidth_block margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f9f9f9">
+            <div class="container">
+                <div class="row slick_carousel_slider">
+                    <div class="col-md-12">
+                        <h3 class="headline_part centered margin-bottom-45">
+                            Các tour du lịch phổ biến của chúng tôi
+                            <span>Khám phá những địa điểm tuyệt vời nhất trong thành phố</span>
+                        </h3>
+                    </div>
+    
+                    <div class="row">
+                        {% for h in popular_hotels %}
+                            <div class="col-lg-4">
+                                <a href="{% url 'hotel:hotel_detail' h.slug %}" class="utf_listing_item-container compact">
+                                    <div class="utf_listing_item">
+                                        <img src="{{ h.image.url }}" alt="">
+                                        <span class="utf_open_now">Đang mở</span>
+                                        <div class="utf_listing_item_content">
+                                            <h3>{{ h.name|truncatechars:20 }}</h3>
+                                            <span><i class="fas fa-location-arrow"></i> {{ h.address }}</span>
+                                            <span><i class="fas fa-phone"></i> {{ h.mobile }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="utf_star_rating_section" data-rating="{{ h.average_rating }}">
+                                        {% if h.average_rating == None %}
+                                            <div class="utf_counter_star_rating">Chưa có đánh giá nào</div>
+                                        {% else %}
+                                            <div class="utf_counter_star_rating">
+                                                {{ h.average_rating }}/5 ({{ h.rating_count }} reviews)
+                                            </div>
+                                        {% endif %}
+                                        <span class="utf_view_count">{{ h.views }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

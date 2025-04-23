@@ -8,6 +8,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from django.db.models import Q
 
 
 
@@ -20,9 +21,26 @@ import json
 
 
 def index(request):
-    hotel = Hotel.objects.filter(status="Live")
+    popular_hotels = Hotel.objects.filter(status="Live").order_by('-views')[:6]
+
+    search_results = None
+
+    if request.method == 'POST':
+        hotel_name = request.POST.get('hotel_name', '').strip()
+        booking_date = request.POST.get('booking_date', '').strip()
+        category = request.POST.get('category', '').strip()
+
+        if hotel_name or booking_date or category:
+            search_results = Hotel.objects.filter(
+                Q(name__icontains=hotel_name) |
+                Q(address__icontains=hotel_name) |
+                Q(tags__name__icontains=category),
+                status="Live"
+            ).distinct()
+
     context = {
-        "hotel":hotel
+        "popular_hotels": popular_hotels,
+        "search_results": search_results,
     }
     return render(request, "hotel/index.html", context)
 
