@@ -239,11 +239,11 @@
                                     <div class="panel-dropdown-content">
                                         <div class="qtyButtons">
                                             <div class="qtyTitle">Người lớn</div>
-                                            <input type="text" name="adult" value="1">
+                                            <input type="number" name="adult" value="1" min="0">
                                         </div>
                                         <div class="qtyButtons">
                                             <div class="qtyTitle">Trẻ em</div>
-                                            <input type="text" name="children" value="0">
+                                            <input type="number" name="children" value="0" min="0">
                                         </div>
                                     </div>
                                 </div>
@@ -333,22 +333,5 @@
             </div>
         </div>
 
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const adultInput = document.querySelector('input[name="adult"]');
-                const childrenInput = document.querySelector('input[name="children"]');
-                const qtyTotalSpan = document.querySelector('.qtyTotal');
-        
-                function updateTotalGuests() {
-                    const totalGuests = parseInt(adultInput.value) + parseInt(childrenInput.value);
-                    qtyTotalSpan.textContent = totalGuests;
-                }
-        
-                // Add event listeners to input fields
-                adultInput.addEventListener('input', updateTotalGuests);
-                childrenInput.addEventListener('input', updateTotalGuests);
-            });
-        </script>
 
 {% endblock content %}
