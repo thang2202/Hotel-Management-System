@@ -189,7 +189,7 @@ def selected_rooms(request):
             booking.before_discount += float(total)
             booking.save()
 
-            messages.success(request, "Checkout Now!")
+            messages.success(request, "Thanh toán ngay!")
             return redirect("hotel:checkout", booking.booking_id)
 
         hotel = None
