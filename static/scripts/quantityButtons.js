@@ -1,12 +1,14 @@
 function qtySum() {
-    var arr = document.getElementsByName('qtyInput');
-    var tot = 0;
-    for (var i = 0; i < arr.length; i++) {
-        if (parseInt(arr[i].value))
-            tot += parseInt(arr[i].value);
-    }
-    var cardQty = document.querySelector(".qtyTotal");
-    cardQty.innerHTML = tot;
+    // Lấy tất cả các input có tên 'adult' và 'children'
+    var adultInput = document.querySelector("input[name='adult']");
+    var childrenInput = document.querySelector("input[name='children']");
+
+    // Tính tổng số khách
+    var totalGuests = parseInt(adultInput.value || 0) + parseInt(childrenInput.value || 0);
+
+    // Cập nhật tổng số khách
+    var qtyTotal = document.querySelector(".qtyTotal");
+    qtyTotal.innerHTML = totalGuests;
 }
 qtySum();
 $(function() {
@@ -16,10 +18,10 @@ $(function() {
         var $button = $(this);
         var oldValue = $button.parent().find("input").val();
         if ($button.hasClass('qtyInc')) {
-            var newVal = parseFloat(oldValue) + 1;
+            var newVal = parseInt(oldValue) + 1;
         } else {
             if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
+                var newVal = parseInt(oldValue) - 1;
             } else {
                 newVal = 0;
             }
