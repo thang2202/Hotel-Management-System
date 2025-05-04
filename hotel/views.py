@@ -116,7 +116,7 @@ def selected_rooms(request):
     checkout = "" 
     children = 0 
     
-    if 'selection_data_obj' in request.session:
+    if 'selection_data_obj' in request.session and request.session['selection_data_obj']:
 
         if request.method == "POST":
             for h_id, item in request.session['selection_data_obj'].items():

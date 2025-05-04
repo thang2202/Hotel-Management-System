@@ -209,7 +209,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
     'site_header': "HTC",
     'site_brand': "Xin chào",
-    'site_logo': "/images/logo.jpg",
+    'site_logo': "/images/logo1.jpg",
     'copyright':  "All Right Reserved 2025",
     "welcome_sign": "Welcome to HTC, Login Now.",
     "topmenu_links": [
