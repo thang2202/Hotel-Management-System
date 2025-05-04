@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
+from django.core.mail import send_mail
 
 
 
@@ -16,6 +17,7 @@ from hotel.models import Coupon, CouponUsers, Hotel, Room, Booking, RoomServices
 
 from datetime import datetime
 from decimal import Decimal
+from .models import Blog
 import json
 import requests
 
@@ -442,6 +444,25 @@ def invoice(request, booking_id):
         "room":booking.room.all(),  
     }
     return render(request, "hotel/invoice.html", context)
+
+def load_more_blogs(request):
+    page = int(request.GET.get('page', 1))
+    blogs_per_page = 4
+    start = (page - 1) * blogs_per_page
+    end = page * blogs_per_page
+
+    blogs = Blog.objects.all()[start:end]
+    has_more = Blog.objects.count() > end
+
+    blogs_data = [{
+        'url': blog.get_absolute_url(),
+        'title': blog.title,
+        'image': blog.image.url,
+        'date': blog.date.strftime('%d-%m-%Y'),
+        'excerpt': blog.excerpt,
+    } for blog in blogs]
+
+    return JsonResponse({'blogs': blogs_data, 'hasMore': has_more})
 
 def contact(request):
     if request.method == 'POST':

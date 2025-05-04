@@ -16,6 +16,7 @@ urlpatterns = [
     path("update_room_status/", views.update_room_status, name="update_room_status"),
     path('contact/', views.contact, name='contact'),
     path('about-us/', views.about_us, name='about_us'),
+    path('api/blogs', views.load_more_blogs, name='load_more_blogs'),
 
     # API và thanh toán
     path('payment/callback/', views.payment_callback, name='payment_callback'),
