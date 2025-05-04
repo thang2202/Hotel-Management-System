@@ -71,11 +71,10 @@
                                 <li><a class="current" href="{% url 'hotel:index' %}">Trang chủ</a></li>
                                 <li><a href="#">Khách sạn</a>
                                     <ul>
-                                        <li><a href="#">Suite</a></li>
-                                        <li><a href="#">Deluxe</a></li>
-                                        <li><a href="#">Superior</a></li>
-                                        <li><a href="#">Standard</a></li>
-                                        
+                                        <li><a href="{% url 'hotel:index' %}?room_type=Suite">Suite</a></li>
+                                        <li><a href="{% url 'hotel:index' %}?room_type=Deluxe">Deluxe</a></li>
+                                        <li><a href="{% url 'hotel:index' %}?room_type=Superior">Superior</a></li>
+                                        <li><a href="{% url 'hotel:index' %}?room_type=Standard">Standard</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Tài khoản</a>
@@ -304,7 +303,7 @@
             autocomplete.addListener('place_changed', function() {
                 var place = autocomplete.getPlace();
                 if (!place.geometry) {
-                    window.alert("No details available for input: '" + place.name + "'");
+                    window.alert("Không có thông tin chi tiết nào có thể nhập vào: '" + place.name + "'");
                     return;
                 }
             });
@@ -352,6 +351,15 @@
             $('#booking-date-search').val('');
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.search) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+    </script>
+
 </body>
 
 </html>

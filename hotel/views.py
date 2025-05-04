@@ -26,19 +26,21 @@ def index(request):
     popular_hotels = Hotel.objects.filter(status="Live").order_by('-views')[:6]
 
     search_results = None
+    room_type = request.GET.get('room_type', '').strip()  # Lấy tham số room_type từ URL
 
-    if request.method == 'POST':
-        hotel_name = request.POST.get('hotel_name', '').strip()
-        booking_date = request.POST.get('booking_date', '').strip()
-        category = request.POST.get('category', '').strip()
+    if request.method == 'POST' or room_type:
+        hotel_name = request.POST.get('hotel_name', '').strip() if request.method == 'POST' else ''
+        booking_date = request.POST.get('booking_date', '').strip() if request.method == 'POST' else ''
+        category = request.POST.get('tags', '').strip() if request.method == 'POST' else ''
 
-        if hotel_name or booking_date or category:
-            search_results = Hotel.objects.filter(
-                Q(name__icontains=hotel_name) |
-                Q(address__icontains=hotel_name) |
-                Q(tags__name__icontains=category),
-                status="Live"
-            ).distinct()
+        # Tìm kiếm khách sạn có liên kết với loại phòng
+        search_results = Hotel.objects.filter(
+            Q(name__icontains=hotel_name) |
+            Q(address__icontains=hotel_name) |
+            Q(tags__name__icontains=category) |
+            Q(roomtype__type__icontains=room_type),
+            status="Live"
+        ).distinct()
 
     context = {
         "popular_hotels": popular_hotels,

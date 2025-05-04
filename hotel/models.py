@@ -105,7 +105,7 @@ class Hotel(models.Model):
         if self.slug == "" or self.slug == None:
             uuid_key = shortuuid.uuid()
             uniqueid = uuid_key[:4]
-            self.slug = slugify(self.title) + "-" + str(uniqueid.lower())
+            self.slug = slugify(self.name) + "-" + str(uniqueid.lower())
             
         super(Hotel, self).save(*args, **kwargs) 
 
@@ -126,7 +126,7 @@ class Hotel(models.Model):
     
     def average_rating(self):
         average_rating = Review.objects.filter(hotel=self, active=True).aggregate(avg_rating=models.Avg("rating"))
-        return average_rating['avg_rating']
+        return average_rating['avg_rating'] or 0.0
     
     def rating_count(self):
         rating_count = Review.objects.filter(hotel=self, active=True).count()
