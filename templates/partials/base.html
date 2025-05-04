@@ -86,8 +86,8 @@
                                 <li><a href="#">Blog</a></li>
                                 <li><a href="#">Thông tin</a>
                                     <ul>
-                                        <li><a href="">Về chúng tôi</a></li>
-                                        <li><a href="">Liên hệ</a></li>
+                                        <li><a href="{% url 'hotel:about_us'%}">Về chúng tôi</a></li>
+                                        <li><a href="{% url 'hotel:contact'%}">Liên hệ</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -199,25 +199,30 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <h4>Về chúng tôi</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                        <p>
+                            Khách sạn của chúng tôi bắt đầu với mục tiêu mang lại những trải nghiệm lưu trú thoải mái và đáng nhớ. Chúng tôi cam kết cung cấp dịch vụ chất lượng cao, đảm bảo sự hài lòng cho tất cả khách hàng của mình.
+                        </p>
+                        <p>
+                            Đội ngũ của chúng tôi luôn làm việc chăm chỉ để tạo ra một môi trường thân thiện, an toàn và đầy đủ tiện nghi. Với sự kết hợp giữa truyền thống và hiện đại, chúng tôi tin rằng khách hàng của mình sẽ luôn cảm thấy như ở nhà.
+                        </p>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
                         <h4>Các liên kết</h4>
                         <ul class="social_footer_link">
                             <li><a href="{% url 'hotel:index'%}">Trang chủ</a></li>
-                            <li><a href="#">Danh sách</a></li>
+                            <li><a href="{% url 'hotel:selected_rooms'%}">Danh sách</a></li>
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Chính sách bảo mật</a></li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="{% url 'hotel:about_us'%}">Về chúng tôi</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
                         <h4>Tài khoản của tôi</h4>
                         <ul class="social_footer_link">
-                            <li><a href="#">Bảng điều khiển</a></li>
-                            <li><a href="#">Hồ sơ</a></li>
-                            <li><a href="#">Danh sách của tôi</a></li>
-                            <li><a href="#">Mục ưa thích</a></li>
+                            <li><a href="{% url 'dashboard:dashboard'%}">Bảng điều khiển</a></li>
+                            <li><a href="{% url 'dashboard:profile'%}">Hồ sơ</a></li>
+                            <li><a href="{% url 'hotel:selected_rooms'%}">Danh sách của tôi</a></li>
+                            <li><a href="{% url 'dashboard:bookmark'%}">Mục ưa thích</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6">
@@ -232,11 +237,10 @@
                     <div class="col-md-2 col-sm-3 col-xs-6">
                         <h4>Giúp đỡ</h4>
                         <ul class="social_footer_link">
-                            <li><a href="#">Đăng nhập</a></li>
-                            <li><a href="#">Đăng ký</a></li>
-                            <li><a href="#">Thêm danh sách</a></li>
-                            <li><a href="#">Giá cả</a></li>
-                            <li><a href="#">Liên hệ với chúng tôi</a></li>
+                            <li><a href="{% url 'userauths:sign-in'%}">Đăng nhập</a></li>
+                            <li><a href="{% url 'userauths:sign-up'%}">Đăng ký</a></li>
+                            <li><a href="{% url 'dashboard:bookmark'%}">Thêm danh sách</a></li>
+                            <li><a href="{% url 'hotel:contact'%}">Liên hệ với chúng tôi</a></li>
                         </ul>
                     </div>
                 </div>

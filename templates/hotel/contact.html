@@ -1,0 +1,64 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+    <section class="contact-form-section margin-top-65 padding-top-75 padding-bottom-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="headline_part centered margin-bottom-45">
+                        Gửi tin nhắn cho chúng tôi
+                        <span>Điền các thông tin bên dưới để liên hệ với chúng tôi</span>
+                    </h3>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Họ và Tên</label>
+                                <input type="text" name="name" placeholder="Họ và Tên" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <textarea name="message" placeholder="Nội dung tin nhắn" rows="5" required></textarea>
+                        <button type="submit" class="button">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-info-section fullwidth_block" data-background-color="#f9f9f9">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Phone-Wifi"></i>
+                        <h4>Hotline</h4>
+                        <p>+84 123 456 789</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Envelope"></i>
+                        <h4>Email</h4>
+                        <p>support@hotelmanagement.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Map-Marker2"></i>
+                        <h4>Địa chỉ</h4>
+                        <p>123 Đường ABC, Thành phố XYZ, Việt Nam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}
+    

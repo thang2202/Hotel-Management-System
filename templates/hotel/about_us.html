@@ -1,0 +1,66 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Banner -->
+    <div class="search_container_block main_search_block" data-background-image="{% static 'images/about_us_banner.jpg' %}">
+        <div class="main_inner_search_block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Về Chúng Tôi</h2>
+                        <h4>Khám phá câu chuyện của chúng tôi và những gì chúng tôi mang lại</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section class="about-us-section margin-top-65 padding-top-75 padding-bottom-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="headline_part centered margin-bottom-45">
+                        Câu chuyện của chúng tôi
+                        <span>Chúng tôi tự hào về việc cung cấp những trải nghiệm tốt nhất cho khách hàng</span>
+                    </h3>
+                    <p>
+                        Khách sạn của chúng tôi bắt đầu với mục tiêu mang lại những trải nghiệm lưu trú thoải mái và đáng nhớ. Chúng tôi cam kết cung cấp dịch vụ chất lượng cao, đảm bảo sự hài lòng cho tất cả khách hàng của mình.
+                    </p>
+                    <p>
+                        Đội ngũ của chúng tôi luôn làm việc chăm chỉ để tạo ra một môi trường thân thiện, an toàn và đầy đủ tiện nghi. Với sự kết hợp giữa truyền thống và hiện đại, chúng tôi tin rằng khách hàng của mình sẽ luôn cảm thấy như ở nhà.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section fullwidth_block" data-background-color="#f9f9f9">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Heart"></i>
+                        <h4>Tận tâm</h4>
+                        <p>Chúng tôi luôn đặt khách hàng lên hàng đầu và cố gắng hết sức để mang lại trải nghiệm tốt nhất.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Flag"></i>
+                        <h4>Uy tín</h4>
+                        <p>Uy tín là giá trị cốt lõi của chúng tôi, đảm bảo khách hàng luôn tin tưởng vào dịch vụ mà chúng tôi cung cấp.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="utf_contact_info_box">
+                        <i class="im im-icon-Star"></i>
+                        <h4>Chất lượng</h4>
+                        <p>Chúng tôi không ngừng cải tiến dịch vụ để đảm bảo chất lượng cao nhất cho khách hàng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

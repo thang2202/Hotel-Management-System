@@ -14,6 +14,8 @@ urlpatterns = [
     path("checkout/<booking_id>/", views.checkout, name="checkout"),
     path("invoice/<booking_id>/", views.invoice, name="invoice"),
     path("update_room_status/", views.update_room_status, name="update_room_status"),
+    path('contact/', views.contact, name='contact'),
+    path('about-us/', views.about_us, name='about_us'),
 
     # API và thanh toán
     path('payment/callback/', views.payment_callback, name='payment_callback'),

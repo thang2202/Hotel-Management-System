@@ -12,7 +12,7 @@ from userauths.forms import UserRegisterForm
 
 def RegisterView(request, *args, **kwargs):
     if request.user.is_authenticated:
-        messages.warning(request, f"Xin chào {request.user.full_name}, bạn vừa đăng nhập.")
+        messages.warning(request, f"Xin chào {request.user.full_name}, bạn đã đăng nhập.")
         return redirect('hotel:index')   
 
     form = UserRegisterForm(request.POST or None)

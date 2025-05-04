@@ -443,6 +443,31 @@ def invoice(request, booking_id):
     }
     return render(request, "hotel/invoice.html", context)
 
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Tiêu đề email
+        subject = f"Tin nhắn từ {name}"
+        # Nội dung email
+        email_message = f"Tên: {name}\nEmail: {email}\n\nNội dung:\n{message}"
+        # Gửi email
+        send_mail(
+            subject,
+            email_message,
+            settings.DEFAULT_FROM_EMAIL,  # Email gửi
+            [settings.DEFAULT_TO_EMAIL], # Email nhận
+            fail_silently=False,
+        )
+
+        return HttpResponse(f"Cảm ơn {name}, tin nhắn của bạn đã được gửi!")
+    return render(request, 'hotel/contact.html')
+
+def about_us(request):
+    return render(request, 'hotel/about_us.html')
+
 @csrf_exempt
 def update_room_status(request):
     today = timezone.now().date()
