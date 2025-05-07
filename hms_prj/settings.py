@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 from environs import Env
 env = Env()  
@@ -30,7 +31,7 @@ SECRET_KEY = 'django-insecure-m*t5wynyhd=2udczig6#n&0337+m=ga!p=cglnd-+srqdpq4r2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['#']
 
 
 # Application definition
@@ -69,6 +70,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -104,14 +106,7 @@ WSGI_APPLICATION = 'hms_prj.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hotel_management_system',  # Tên database đã tạo
-        'USER': 'hotel_admin',  # Tên user đã tạo
-        'PASSWORD': 'thang2202',  # Mật khẩu của user
-        'HOST': 'localhost',  # PostgreSQL chạy local
-        'PORT': '5432',  # Cổng mặc định của PostgreSQL
-    }
+    'default': dj_database_url.config(conn_max_age=600)
 }
 
 
@@ -171,10 +166,7 @@ LOGOUT_REDIRECT_URL = "userauths:sign-in"
 
 AUTH_USER_MODEL = 'userauths.User'
 
-# Whitenoise (dùng để phục vụ static file)
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-
-ALLOWED_HOSTS = ['your-app-name.onrender.com']  # Sau sẽ update chính xác
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Payment Gateway API Keys
 MOMO_API_KEY = "YOUR_MOMO_API_KEY"
