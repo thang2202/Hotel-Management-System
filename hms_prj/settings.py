@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m*t5wynyhd=2udczig6#n&0337+m=ga!p=cglnd-+srqdpq4r2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -170,6 +170,11 @@ LOGIN_REDIRECT_URL = ""
 LOGOUT_REDIRECT_URL = "userauths:sign-in"
 
 AUTH_USER_MODEL = 'userauths.User'
+
+# Whitenoise (dùng để phục vụ static file)
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+ALLOWED_HOSTS = ['your-app-name.onrender.com']  # Sau sẽ update chính xác
 
 # Payment Gateway API Keys
 MOMO_API_KEY = "YOUR_MOMO_API_KEY"
